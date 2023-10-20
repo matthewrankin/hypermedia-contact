@@ -6,7 +6,7 @@ import (
 )
 
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World!")
+	http.Redirect(w, r, fmt.Sprint("/contacts"), http.StatusSeeOther)
 }
 func main() {
 	http.HandleFunc("/", handlerFunc)
