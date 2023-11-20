@@ -1,0 +1,26 @@
+services:
+  contacts-api:
+    env_file: ./config/.env.dev
+    container_name: contacts-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    depends_on:
+      - contacts-db
+  contacts-db:
+    env_file: ./config/.env.dev
+    container_name: contacts-db
+    image: postgres:16-alpine
+    restart: always
+    ports:
+      - 4232:5432
+    volumes:
+      - "./init:/docker-entrypoint-initdb.d"
+  contacts-adminer:
+    container_name: contacts-adminer
+    image: adminer
+    restart: always
+    ports:
+      - 4240:8080

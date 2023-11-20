@@ -39,18 +39,18 @@ cover:
 
 local:
 	@echo "Building for local operating system"
-	env go build -o dist/snippetbox ./cmd/web/
+	env go build -o dist/contacts ./cmd/web/
 
 dev: local
-	dist/snippetbox -addr=":4100"
+	dist/contacts -addr=":4100"
 
 docker:
 	@echo "Building in Docker container"
-	docker build -t snippetbox:latest .
+	docker build -t contacts:latest .
 
 dock: docker
 	@echo "Building and running in Docker container"
-	docker run --rm -p 4100:4100 snippetbox:latest
+	docker run --rm -p 4100:4100 contacts:latest
 
 up:
 	docker compose build
